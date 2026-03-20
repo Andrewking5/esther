@@ -142,9 +142,8 @@ const SkillMarquee = ({ items }: { items: string[] }) => {
 };
 
 /* ─── Test Tube Scroll Progress ─── */
-const TestTubeProgress = () => {
+const useScrollProgress = () => {
   const [progress, setProgress] = useState(0);
-
   useEffect(() => {
     const onScroll = () => {
       const scrollTop = window.scrollY;
@@ -154,15 +153,18 @@ const TestTubeProgress = () => {
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
+  return progress;
+};
+
+/* ─── Desktop: Test Tube (right side) ─── */
+const TestTubeProgress = () => {
+  const progress = useScrollProgress();
 
   return (
     <div className="test-tube-container">
       <div className="text-xs mb-2">🧪</div>
       <div className="test-tube">
-        <div
-          className="test-tube-liquid"
-          style={{ height: `${progress * 100}%` }}
-        />
+        <div className="test-tube-liquid" style={{ height: `${progress * 100}%` }} />
         {progress > 0.1 && progress < 0.95 && (
           <>
             <div className="test-tube-bubble" style={{ left: '4px', bottom: `${progress * 60}%`, animationDelay: '0s' }} />
@@ -171,6 +173,30 @@ const TestTubeProgress = () => {
         )}
       </div>
       <div className="font-mono text-[9px] text-pink-400 mt-1">{Math.round(progress * 100)}%</div>
+    </div>
+  );
+};
+
+/* ─── Mobile: Horizontal potion bar (below navbar) ─── */
+const MobilePotionBar = () => {
+  const progress = useScrollProgress();
+
+  return (
+    <div className="mobile-potion-bar lg:hidden">
+      <div className="mobile-potion-track">
+        <div className="mobile-potion-liquid" style={{ width: `${progress * 100}%` }}>
+          {progress > 0.05 && progress < 0.98 && (
+            <div className="mobile-potion-bubbles">
+              <span className="mobile-bubble" style={{ left: '30%', animationDelay: '0s' }} />
+              <span className="mobile-bubble" style={{ left: '60%', animationDelay: '0.5s' }} />
+              <span className="mobile-bubble" style={{ left: '80%', animationDelay: '1.2s' }} />
+            </div>
+          )}
+        </div>
+        <div className="mobile-potion-icon" style={{ left: `calc(${Math.min(progress * 100, 96)}% - 8px)` }}>
+          🧪
+        </div>
+      </div>
     </div>
   );
 };
@@ -248,7 +274,7 @@ const Section = ({ id, children }: { id: string; children: React.ReactNode }) =>
   const isInView = useInView(ref, { amount: 0.15, once: true });
 
   return (
-    <section id={id} ref={ref} className="scroll-mt-20">
+    <section id={id} ref={ref} className="scroll-mt-24 lg:scroll-mt-20">
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
@@ -321,6 +347,7 @@ function AppInner() {
   return (
     <div className="min-h-screen flex flex-col grain-overlay">
       <TestTubeProgress />
+      <MobilePotionBar />
       <EmojiProgress activeSection={activeSection} />
       <Navbar activeSection={activeSection} setActiveSection={scrollTo} />
       <main className="flex-grow">
