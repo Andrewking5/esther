@@ -320,7 +320,6 @@ function AppInner() {
 
   return (
     <div className="min-h-screen flex flex-col grain-overlay">
-      <CursorGlow />
       <TestTubeProgress />
       <EmojiProgress activeSection={activeSection} />
       <Navbar activeSection={activeSection} setActiveSection={scrollTo} />
@@ -588,14 +587,6 @@ const ResearchContent = () => {
         </div>
       </section>
 
-      {/* Quote */}
-      <section className="text-center mb-20 md:mb-32 max-w-3xl mx-auto px-4">
-        <Quote className="text-pink-100 mx-auto mb-8" size={64} />
-        <blockquote className="font-headline text-2xl md:text-3xl italic text-slate-800 leading-snug mb-8">
-          {t.research.quote}
-        </blockquote>
-        <p className="font-mono text-sm uppercase tracking-[0.2em] text-slate-400">{t.research.quoteAuthor}</p>
-      </section>
     </div>
   );
 };

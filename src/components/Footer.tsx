@@ -28,9 +28,6 @@ const Footer: React.FC = () => {
           {t.footer.copyright}
         </div>
         <div className="flex gap-6">
-          <a href="#" className="font-mono text-[10px] uppercase tracking-widest text-pink-400 opacity-60 hover:opacity-100 transition-opacity">
-            {t.footer.privacy}
-          </a>
           <a href="/resume.pdf" download className="font-mono text-[10px] uppercase tracking-widest text-emerald-600 opacity-60 hover:opacity-100 transition-opacity">
             {t.footer.downloadPdf}
           </a>
