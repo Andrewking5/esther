@@ -125,7 +125,7 @@ const skillEmojis: Record<string, string> = {
 const SkillMarquee = ({ items }: { items: string[] }) => {
   const doubled = [...items, ...items];
   return (
-    <div className="overflow-hidden py-6 -mx-6 md:-mx-8">
+    <div className="overflow-hidden py-4 md:py-6 -mx-4 sm:-mx-6 md:-mx-8">
       <div className="marquee-track">
         {doubled.map((item, i) => (
           <span
@@ -156,7 +156,7 @@ const TestTubeProgress = () => {
   }, []);
 
   return (
-    <div className="test-tube-container hidden lg:flex">
+    <div className="test-tube-container">
       <div className="text-xs mb-2">🧪</div>
       <div className="test-tube">
         <div
@@ -196,7 +196,7 @@ const EmojiProgress = ({ activeSection }: { activeSection: string }) => {
   }, []);
 
   return (
-    <div className="emoji-progress hidden md:block">
+    <div className="emoji-progress">
       <svg width="52" height="52" viewBox="0 0 52 52">
         <circle cx="26" cy="26" r={radius} fill="white" stroke="#fce7f3" strokeWidth="3" />
         <circle
@@ -355,7 +355,7 @@ export default function App() {
 const HomeContent = () => {
   const { t, lang } = useLang();
   return (
-    <div className="max-w-7xl mx-auto px-6 md:px-8 py-12 md:py-20">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 py-10 md:py-20">
       {/* Hero with Typewriter */}
       <section className="grid grid-cols-12 gap-6 md:gap-8 mb-20 md:mb-32">
         <div className="col-span-12 md:col-span-8">
@@ -377,7 +377,7 @@ const HomeContent = () => {
               >
                 {t.home.subtitle}
               </motion.span>
-              <h1 className="font-headline text-4xl md:text-7xl text-slate-900 leading-[1.1]">
+              <h1 className="font-headline text-3xl sm:text-4xl md:text-7xl text-slate-900 leading-[1.1]">
                 <Typewriter text={t.home.name} speed={80} key={`name-${lang}`} />
                 <br />
                 <span className="italic text-emerald-700">
@@ -395,7 +395,7 @@ const HomeContent = () => {
             {t.home.tagline}
           </motion.p>
           <motion.div
-            className="bg-white p-8 md:p-10 rounded-2xl shadow-sm border border-slate-100 relative overflow-hidden group"
+            className="bg-white p-5 sm:p-8 md:p-10 rounded-2xl shadow-sm border border-slate-100 relative overflow-hidden group"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.5 }}
@@ -417,29 +417,68 @@ const HomeContent = () => {
             <p className="text-sm text-slate-600">{t.home.locationDesc}</p>
           </motion.div>
           <motion.div
-            className="bg-emerald-50 p-6 rounded-2xl border border-emerald-100"
+            className="bg-gradient-to-br from-emerald-50 to-teal-50 p-5 sm:p-6 rounded-2xl border-2 border-emerald-200"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.0 }}
           >
-            <h3 className="font-mono text-[10px] uppercase tracking-widest text-emerald-700 mb-3">{t.home.jobIntent}</h3>
+            <h3 className="font-mono text-xs uppercase tracking-widest text-emerald-700 mb-3 flex items-center gap-2">
+              <span>📋</span> {t.home.jobIntent}
+            </h3>
             <div className="space-y-3">
               <div>
                 <span className="text-[10px] font-mono text-slate-400 block">{t.home.targetPosition}</span>
-                <p className="text-xs text-slate-700 leading-relaxed">{t.home.positions}</p>
+                <p className="text-xs sm:text-sm text-slate-700 leading-relaxed">{t.home.positions}</p>
               </div>
-              <div className="flex gap-6">
-                <div>
+              <div className="flex gap-4 sm:gap-6">
+                <div className="bg-white/60 px-3 py-2 rounded-lg">
                   <span className="text-[10px] font-mono text-slate-400 block">{t.home.availability}</span>
-                  <p className="text-xs text-emerald-700 font-medium">{t.home.availableNow}</p>
+                  <p className="text-xs sm:text-sm text-emerald-700 font-bold">{t.home.availableNow}</p>
                 </div>
-                <div>
+                <div className="bg-white/60 px-3 py-2 rounded-lg">
                   <span className="text-[10px] font-mono text-slate-400 block">{t.home.expectedLocation}</span>
-                  <p className="text-xs text-slate-700">{t.home.shenzhen}</p>
+                  <p className="text-xs sm:text-sm text-slate-700 font-medium">{t.home.shenzhen}</p>
                 </div>
               </div>
             </div>
           </motion.div>
+        </div>
+      </section>
+
+      {/* ★ Core Competency Snapshot — HR 3-second scan */}
+      <section className="mb-16 md:mb-24">
+        <div className="flex items-baseline gap-4 mb-8">
+          <h2 className="font-headline text-2xl sm:text-3xl md:text-4xl italic">🎯 {t.home.coreSnapshot}</h2>
+          <div className="h-px flex-grow bg-slate-200"></div>
+        </div>
+        <StaggerGrid className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          {[
+            { icon: <Microscope size={28} />, title: t.home.snapshot_lab, sub: t.home.snapshot_labSub, accent: 'border-emerald-200 bg-emerald-50/50' },
+            { icon: <Dna size={28} />, title: t.home.snapshot_mol, sub: t.home.snapshot_molSub, accent: 'border-pink-200 bg-pink-50/50' },
+            { icon: <GraduationCap size={28} />, title: t.home.snapshot_credits, sub: t.home.snapshot_creditsSub, accent: 'border-purple-200 bg-purple-50/50' },
+            { icon: <Zap size={28} />, title: t.home.snapshot_ready, sub: t.home.snapshot_readySub, accent: 'border-amber-200 bg-amber-50/50' },
+          ].map((item) => (
+            <div key={item.title} className={`p-4 sm:p-5 rounded-2xl border-2 ${item.accent} card-cute transition-all`}>
+              <div className="text-emerald-600 mb-3">{item.icon}</div>
+              <p className="font-headline text-sm sm:text-base font-bold text-slate-900 mb-1">{item.title}</p>
+              <p className="text-[11px] sm:text-xs text-slate-500 leading-relaxed">{item.sub}</p>
+            </div>
+          ))}
+        </StaggerGrid>
+      </section>
+
+      {/* ★ Why Choose Me — differentiator */}
+      <section className="mb-16 md:mb-24">
+        <div className="gradient-border rounded-2xl p-[2px]">
+          <div className="bg-white rounded-2xl p-6 sm:p-8 flex flex-col sm:flex-row gap-6 items-start">
+            <div className="w-12 h-12 rounded-full bg-pink-50 flex items-center justify-center shrink-0">
+              <span className="text-2xl">💡</span>
+            </div>
+            <div>
+              <h3 className="font-headline text-xl sm:text-2xl mb-3 text-slate-900">{t.home.whyMe}</h3>
+              <p className="text-sm sm:text-base text-slate-600 leading-relaxed">{t.home.whyMeDesc}</p>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -504,10 +543,10 @@ const HomeContent = () => {
 const ResearchContent = () => {
   const { t } = useLang();
   return (
-    <div className="max-w-7xl mx-auto px-6 md:px-8 py-12 md:py-20">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 py-10 md:py-20">
       <header className="mb-20 md:mb-32">
         <p className="font-mono text-emerald-600 uppercase tracking-widest mb-4">{t.research.profileLabel}</p>
-        <h1 className="font-headline text-5xl md:text-8xl font-bold tracking-tighter text-slate-900 leading-tight mb-8">
+        <h1 className="font-headline text-3xl sm:text-5xl md:text-8xl font-bold tracking-tighter text-slate-900 leading-tight mb-8">
           {t.research.name} <span className="italic font-normal text-emerald-700">{t.research.nameCn}</span>
         </h1>
         <p className="text-lg md:text-2xl text-slate-600 font-headline italic max-w-2xl border-l-2 border-emerald-200 pl-6">
@@ -553,13 +592,13 @@ const ResearchContent = () => {
       </section>
 
       {/* Selected Research Project */}
-      <section className="mb-20 md:mb-32 py-16 md:py-24 px-8 md:px-12 bg-slate-50 rounded-[2rem] relative overflow-hidden">
+      <section className="mb-20 md:mb-32 py-10 md:py-24 px-5 sm:px-8 md:px-12 bg-slate-50 rounded-[2rem] relative overflow-hidden">
         <div className="max-w-4xl relative z-10">
           <div className="flex flex-wrap items-center gap-3 mb-6">
             <span className="inline-block px-3 py-1 rounded bg-emerald-100 text-emerald-800 font-mono text-[10px] uppercase tracking-widest">{t.research.selectedProject}</span>
             <span className="font-mono text-xs text-slate-400">{t.research.projectDate}</span>
           </div>
-          <h2 className="font-headline text-3xl md:text-5xl font-bold text-slate-900 mb-8 leading-tight">
+          <h2 className="font-headline text-2xl sm:text-3xl md:text-5xl font-bold text-slate-900 mb-8 leading-tight">
             {t.research.projectTitle}<br /><span className="text-emerald-700 italic">{t.research.projectTitleHighlight}</span>
           </h2>
           <StaggerGrid className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 mt-12">
@@ -606,9 +645,9 @@ const SkillsContent = () => {
   ];
 
   return (
-    <div className="max-w-7xl mx-auto px-6 md:px-8 py-12 md:py-20">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 py-10 md:py-20">
       <div className="flex items-baseline gap-4 mb-12 md:mb-16">
-        <h2 className="font-headline text-3xl md:text-5xl">{t.skills.title}</h2>
+        <h2 className="font-headline text-2xl sm:text-3xl md:text-5xl">{t.skills.title}</h2>
         <span className="h-px flex-1 bg-slate-200"></span>
         <span className="font-mono text-xs text-slate-400 tracking-widest hidden md:block">{t.skills.coreCompetencies}</span>
       </div>
@@ -727,12 +766,12 @@ const SkillsContent = () => {
 const ResumeContent = () => {
   const { t } = useLang();
   return (
-    <div className="max-w-7xl mx-auto px-6 md:px-8 py-12 md:py-20">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 py-10 md:py-20">
       {/* Hero */}
       <section className="flex flex-col md:flex-row gap-12 md:gap-16 items-baseline mb-20 md:mb-32">
         <div className="md:w-2/3">
           <span className="font-mono text-emerald-600 uppercase tracking-[0.2em] mb-4 block">{t.resume.personalNarrative}</span>
-          <h1 className="font-headline text-5xl md:text-8xl text-slate-900 leading-tight tracking-tighter mb-8">
+          <h1 className="font-headline text-3xl sm:text-5xl md:text-8xl text-slate-900 leading-tight tracking-tighter mb-8">
             {t.resume.name} <span className="italic font-light text-slate-400 text-3xl md:text-6xl">{t.resume.nameEn}</span>
           </h1>
           <div className="font-headline italic text-xl md:text-3xl text-slate-700 mb-8">{t.resume.motto}</div>
@@ -744,7 +783,7 @@ const ResumeContent = () => {
             whileHover={{ rotate: 0, scale: 1.05 }}
             transition={{ type: 'spring', stiffness: 300 }}
           >
-            <div className="font-mono text-emerald-800 text-5xl md:text-6xl font-bold">
+            <div className="font-mono text-emerald-800 text-4xl sm:text-5xl md:text-6xl font-bold">
               <AnimatedCounter value={193} />
             </div>
             <div className="font-mono text-emerald-700 text-sm mt-2 tracking-widest uppercase">{t.resume.creditsEarned}</div>
@@ -788,7 +827,7 @@ const ResumeContent = () => {
       {/* Academic Milestones — Stagger */}
       <section className="mb-20 md:mb-32">
         <div className="flex items-baseline gap-4 mb-12 md:mb-16">
-          <h2 className="font-headline text-3xl md:text-5xl">{t.resume.milestoneTitle}</h2>
+          <h2 className="font-headline text-2xl sm:text-3xl md:text-5xl">{t.resume.milestoneTitle}</h2>
           <span className="h-px flex-1 bg-slate-200"></span>
           <span className="font-mono text-xs text-slate-400 tracking-widest hidden md:block">{t.resume.academicExcellence}</span>
         </div>
@@ -831,7 +870,7 @@ const ResumeContent = () => {
       {/* Personality & Soft Skills — Stagger */}
       <section className="mb-20 md:mb-32">
         <div className="flex items-baseline gap-4 mb-12 md:mb-16">
-          <h2 className="font-headline text-3xl md:text-5xl">{t.resume.softSkillsTitle}</h2>
+          <h2 className="font-headline text-2xl sm:text-3xl md:text-5xl">{t.resume.softSkillsTitle}</h2>
           <span className="h-px flex-1 bg-slate-200"></span>
         </div>
         <StaggerGrid className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -895,9 +934,9 @@ const ExperienceContent = () => {
   ];
 
   return (
-    <div className="max-w-7xl mx-auto px-6 md:px-8 py-12 md:py-20">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 py-10 md:py-20">
       <div className="flex items-baseline gap-4 mb-12 md:mb-16">
-        <h2 className="font-headline text-3xl md:text-5xl">{t.experience.title}</h2>
+        <h2 className="font-headline text-2xl sm:text-3xl md:text-5xl">{t.experience.title}</h2>
         <span className="h-px flex-1 bg-slate-200"></span>
         <span className="font-mono text-xs text-slate-400 tracking-widest hidden md:block">{t.experience.workExperience}</span>
       </div>
@@ -988,12 +1027,12 @@ const ExperienceContent = () => {
 const ContactContent = () => {
   const { t } = useLang();
   return (
-    <div className="max-w-7xl mx-auto px-6 md:px-8 py-12 md:py-20">
-      <section className="bg-white rounded-3xl p-8 md:p-20 shadow-sm border border-slate-100 relative overflow-hidden">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 py-10 md:py-20">
+      <section className="bg-white rounded-2xl sm:rounded-3xl p-5 sm:p-8 md:p-20 shadow-sm border border-slate-100 relative overflow-hidden">
         <div className="absolute inset-0 opacity-5 pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, #ec4899 1px, transparent 0)', backgroundSize: '24px 24px' }}></div>
         <div className="max-w-2xl mx-auto text-center relative z-10">
           <span className="font-mono text-emerald-600 uppercase tracking-widest text-xs mb-6 block">{t.contact.readyLabel}</span>
-          <h2 className="font-headline text-3xl md:text-5xl mb-8 text-slate-900">
+          <h2 className="font-headline text-2xl sm:text-3xl md:text-5xl mb-8 text-slate-900">
             {t.contact.title} {t.contact.titleEn && <span className="text-slate-400">/ {t.contact.titleEn}</span>}
           </h2>
           <p className="text-slate-600 mb-12 text-base md:text-lg">{t.contact.desc}</p>

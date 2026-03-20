@@ -38,7 +38,7 @@ const Navbar: React.FC<NavbarProps> = ({ activeSection, setActiveSection }) => {
     <nav className="sticky top-0 w-full z-50 glass-nav border-b border-pink-100/60">
       <div className="flex justify-between items-center px-6 md:px-8 py-4 max-w-7xl mx-auto">
         <div
-          className="text-2xl font-headline italic text-emerald-800 cursor-pointer flex items-center gap-2"
+          className="text-xl sm:text-2xl font-headline italic text-emerald-800 cursor-pointer flex items-center gap-2"
           onClick={() => handleNav('home')}
         >
           <span>🧪</span>
