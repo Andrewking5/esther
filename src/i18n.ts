@@ -11,7 +11,7 @@ export type Translations = typeof translations['zh-TW'];
 export const translations = {
   'zh-TW': {
     nav: {
-      brand: '科研檔案',
+      brand: '恩慈的履歷',
       research: '研究成果',
       skills: '實驗技能',
       resume: '學術履歷',
@@ -216,7 +216,7 @@ export const translations = {
   },
   'zh-CN': {
     nav: {
-      brand: '科研档案',
+      brand: '恩慈的履历',
       research: '研究成果',
       skills: '实验技能',
       resume: '学术履历',
@@ -420,7 +420,7 @@ export const translations = {
   },
   'en': {
     nav: {
-      brand: 'Research Portfolio',
+      brand: "En-Tzu's Resume",
       research: 'Research',
       skills: 'Skills',
       resume: 'Resume',
